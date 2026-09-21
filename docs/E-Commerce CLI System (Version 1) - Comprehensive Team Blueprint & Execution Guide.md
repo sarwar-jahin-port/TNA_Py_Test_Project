@@ -1,10 +1,24 @@
-# E-Commerce CLI System (Version 1\)
+```text
+ ====================================================================================
+ |                                                                                  |
+ |    #####   #        ######   #####   #     #  #     #  #####  ######  #####      |
+ |    #       #        #       #     #  #     #  ##   ##  #      #       #    #     |
+ |    #####   #        #       #     #  ##   ##  # # # #  #####  ######  #####      |
+ |    #       #        #       #     #  # # # #  #  #  #  #      #       #   #      |
+ |    #####   #######  ######   #####   #  #  #  #     #  #####  ######  #    #     |
+ |                                                                                  |
+ |                      [ C L I   S Y S T E M   v 1 . 0 ]                           |
+ |                                                                                  |
+ ====================================================================================
+```
+
+# E-Commerce CLI System (Version 1)
 
 ## Comprehensive Team Blueprint & Execution Guide
 
 ---
 
-## 1\. Executive Summary & Project Goal
+## 1. Executive Summary & Project Goal
 
 The **E-Commerce CLI System** is a lightweight, function-based terminal application built in Python. It provides a complete e-commerce workflow—including user authentication, product catalog browsing, inventory management, shopping cart operations, discount applications, and sales reporting.
 
@@ -17,48 +31,37 @@ The **E-Commerce CLI System** is a lightweight, function-based terminal applicat
 
 ---
 
-## 2\. System Architecture & Component Mapping
+## 2. System Architecture & Component Mapping
 
-                               ┌─────────────────────────┐
-
-                               │         db.py           │
-
-                               │   (In-Memory Storage)   │
-
-                               └────────────┬────────────┘
-
-                                            │
-
-                               ┌────────────▼────────────┐
-
-                               │         main.py         │
-
-                               │    (CLI Orchestrator)   │
-
-                               └────────────┬────────────┘
-
-                                            │
-
-        ┌───────────────────────────────────┼───────────────────────────────────┐
-
-        ▼                                   ▼                                   ▼
-
-┌─────────────────┐               ┌─────────────────┐               ┌─────────────────┐
-
-│     auth.py     │               │   catalog.py    │               │    orders.py    │
-
-│ (User & Access) │               │ (Products/Stock)│               │ (Cart & Orders) │
-
-└─────────────────┘               └─────────────────┘               └─────────────────┘
+```text
+                       +-------------------------+
+                       |          db.py          |
+                       |   (In-Memory Storage)   |
+                       +------------+------------+
+                                    |
+                                    v
+                       +-------------------------+
+                       |         main.py         |
+                       |    (CLI Orchestrator)   |
+                       +------------+------------+
+                                    |
+            +-----------------------+-----------------------+
+            |                       |                       |
+            v                       v                       v
+  +-------------------+   +-------------------+   +-------------------+
+  |      auth.py      |   |    catalog.py     |   |     orders.py     |
+  | (User & Access)   |   | (Products/Stock)  |   |  (Cart & Orders)  |
+  +-------------------+   +-------------------+   +-------------------+
+```
 
 ---
 
-## 3\. Standardized Data Structures & Schema
+## 3. Standardized Data Structures & Schema
 
 All modules communicate strictly using Python standard data types (lists, dictionaries, and sets).
 
 | Entity | Python Data Structure | Example Schema |
-| :---- | :---- | :---- |
+| :--- | :--- | :--- |
 | **Users Database** | `list[dict]` | `[{"id": 1, "username": "admin", "password": "123", "role": "admin"}]` |
 | **Catalog Database** | `list[dict]` | `[{"id": 101, "name": "Keyboard", "price": 2000.0, "stock": 10}]` |
 | **Shopping Cart** | `list[dict]` | `[{"id": 101, "name": "Keyboard", "price": 2000.0, "qty": 2}]` |
@@ -67,7 +70,18 @@ All modules communicate strictly using Python standard data types (lists, dictio
 
 ---
 
-## 4\. Team Member Roles & Technical Responsibilities
+## 4. Team Member Roles & Technical Responsibilities
+
+```text
+  ┌────────────────────────────────────────────────────────────────────────┐
+  │                           TEAM ASSIGNMENTS                             │
+  ├───────────────────┬────────────────────────────────────────────────────┤
+  │ Member 1          │ User Authentication & Access Control (auth.py)     │
+  │ Member 2          │ Product Catalog & Inventory (catalog.py)           │
+  │ Member 3          │ Cart Calculation & Order Processing (orders.py)    │
+  │ Member 4 (Lead)   │ CLI Orchestrator & Storage (db.py & main.py)       │
+  └───────────────────┴────────────────────────────────────────────────────┘
+```
 
 ### Member 1: User Authentication & Access Control (`auth.py`)
 
@@ -103,42 +117,44 @@ All modules communicate strictly using Python standard data types (lists, dictio
 * **Core Responsibilities:** Terminal interface navigation, menu control flow, I/O routing, and sales summary reporting.  
 * **Files & Functions to Build:**  
   * `db.py`: Stores initial mock datasets for users, products, roles, and order history.  
-  * `main.py` \-\> `main_menu()`: Controls the terminal loop (`while True`) for user interaction across Browsing, Cart, and Admin options.  
+  * `main.py` -> `main_menu()`: Controls the terminal loop (`while True`) for user interaction across Browsing, Cart, and Admin options.  
   * `generate_sales_report(orders_list)`: Aggregates complete order history to compute total revenue and sales statistics.
 
 ---
 
-## 5\. **Recommended Git Workflow Strategy**
+## 5. Recommended Git Workflow Strategy
 
-1. ## **Branch Naming Standard (`feature/<scope>/<developer_name>`)**
+```text
+                  (feature/auth/dev-1)
+                     ┌─ [Feature] ──┐
+                     │              │
+  (main)  ───────────┼──────────────┼───────────► [v1.0 Release]
+                     │              │
+   (dev)  ───────────┴──────────────┴───────────► [Integration]
+```
 
-   * ## Keeping standard prefixes like `feature/` alongside the dev's name ensures clarity on who owns the branch and what feature it belongs to.
+1. **Branch Naming Standard (`feature/<scope>/<developer_name>`)**
+   * Keeping standard prefixes like `feature/` alongside the dev's name ensures clarity on who owns the branch and what feature it belongs to.
+   * Examples: `feature/auth/sarwar`
 
-   * ## Examples:
+2. **Branching Off `dev`**
+   * `dev` serves as the continuous integration branch.
+   * Developers create their feature branches directly off `dev` and push their work there.
 
-     * ## `feature/auth/sarwar`
+3. **Pull Request (PR) & Mandatory Code Reviews**
+   * Code is pushed to GitHub, and a PR is opened targeting **`dev`** (never directly to `main`).
+   * A minimum of **1 peer approval** is required before merging into `dev`.
 
-2. ## **Branching Off `dev`**
+4. **Release Cutover (`dev` -> `main`)**
+   * Once all team features are merged and Version 1 is tested and confirmed stable on `dev`, a final Pull Request is created from **`dev` to `main`**.
 
-   * ## `dev` serves as the continuous integration branch.
+---
 
-   * ## Developers create their feature branches directly off `dev` and push their work there.
+## 6. Testing & Final Verification Checklist
 
-3. ## **Pull Request (PR) & Mandatory Code Reviews**
-
-   * ## Code is pushed to GitHub, and a PR is opened targeting **`dev`** (never directly to `main`).
-
-   * ## A minimum of **1 peer approvals** is required before merging into `dev`.
-
-4. ## **Release Cutover (`dev` \-\> `main`)**
-
-   * ## Once all team features are merged and Version 1 is tested and confirmed stable on `dev`, a final Pull Request is created from **`dev` to `main`**.
-
-## 6\. Testing & Final Verification Checklist
-
-Prior to project submission, perform the following validation steps:
-
-1. Run the system end-to-end: `python main.py`.  
-2. Test user login with customer and admin roles.  
-3. Search for products, add items to cart, verify stock reduction, and complete an order.  
-4. Verify overall commit structure and branch graph: `git log --graph --oneline`.
+```text
+  [ ] Step 1: Run the system end-to-end: python main.py
+  [ ] Step 2: Test user login with customer and admin roles.
+  [ ] Step 3: Search products, add items to cart, verify stock reduction, and complete order.
+  [ ] Step 4: Verify overall commit structure and branch graph: git log --graph --oneline
+```
