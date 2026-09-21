@@ -44,3 +44,5 @@ def update_stock(catalog, product_id, quantity):
             else:
                 return False  # Not enough stock
     return False  # Product ID not found
+
+print(update_stock(catalog, 103, 2))
