@@ -18,8 +18,7 @@ def apply_discount(total,rate=0.01) -> float:
         rate = 0.4
 
     return round(total - (total * rate)) #returning the final discounted price
-
-    
+ 
 #this function aggregates all the user and cart  
 def create_order(user,cart):
     total = calculate_cart_total(cart)
