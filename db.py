@@ -53,7 +53,7 @@ current_cart = []
 #simulation for cart 
 cart = [
     {"price": 100.5282, "qty": 2},
-    {"price": 50.224424, "qty": 3}
+    {"price": 100.224424, "qty": 3}
 ]
 
 orders_db = []
