@@ -1,6 +1,5 @@
 from db import catalog_db
 
-
 def get_available_products(catalog_db):
     """Filters and returns items where stock > 0."""
     return [product for product in catalog_db if product["stock"] > 0]
