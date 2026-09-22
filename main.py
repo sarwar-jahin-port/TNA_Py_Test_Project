@@ -4,7 +4,6 @@ import orders
 cart = orders.cart
 users = db.users_db
 
-
 print(users)
 
 #printing orders

@@ -1,8 +1,4 @@
-#simulation for cart 
-cart = [
-    {"price": 100, "qty": 2},
-    {"price": 50, "qty": 3}
-]
+from db import cart
 
 def calculate_cart_total(cart) ->float :
     total = 0
@@ -10,19 +6,17 @@ def calculate_cart_total(cart) ->float :
         # print(item)
         item_price = item['price'] * item['qty']
         total += item_price
-    return total
+    return round(total,2)
 
-
+#this the function which deals with applying discount 
 def apply_discount(total,rate=0.20) -> float: 
     return total - (total * rate)
-
+    
+#this function aggregates all the user and cart  
 def create_order(user,cart):
-
     total = calculate_cart_total(cart)
-
-
     return {"User_name": user.username,
-             "Cart":cart , 
+             "Cart":cart, 
              "total" : apply_discount(total)
              }
             
