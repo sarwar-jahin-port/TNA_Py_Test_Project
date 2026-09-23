@@ -8,7 +8,7 @@ def login(users_db, username, password):
          print("User login failed:", username)
          return None
 print(login(users_db, "admin", "123"))
-print("kalpo")
+
 
 
        
@@ -21,7 +21,7 @@ def check_permission(user_role, allowed_roles):
         print("Permission denied for role:", user_role)
         return False
 print(check_permission("admin", {"admin", "customer"}))
-print(check_permission("masum", {"admin", "customer"}))  
+  
  
     
 
