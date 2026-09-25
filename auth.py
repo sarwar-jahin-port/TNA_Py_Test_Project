@@ -21,8 +21,6 @@ def check_permission(user_role, allowed_roles):
     print("Permission denied for role:", user_role)
     return False
 
-
-
 #log file 
 
 LOG_FILE = Path(__file__).with_name("log.md")
