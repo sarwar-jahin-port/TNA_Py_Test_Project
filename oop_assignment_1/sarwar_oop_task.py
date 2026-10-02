@@ -1,0 +1,1 @@
+# will try to create a bank system using class, contructor, self, inheritance.
